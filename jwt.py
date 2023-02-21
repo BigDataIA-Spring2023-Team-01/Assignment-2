@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from exceptiongroup import catch
 
 from fastapi import Depends, FastAPI, HTTPException, status,Form
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -31,8 +32,11 @@ class TokenData(BaseModel):
 class User(BaseModel):
     username: str
     email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
+    status: str | None = None
+
+class Login(BaseModel):
+    username: str
+    password: str
 
 
 class UserInDB(User):
@@ -55,7 +59,10 @@ def get_password_hash(password):
 
 
 def get_user(conn, username: str): 
-    results = next(db.query('select * from login where username = ?',(username,)))
+
+    query = 'select * from login where username = ?'
+    results = next(db.query(query,(username,)))
+    
     return UserInDB(**results)
 
 
@@ -105,9 +112,9 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     return current_user
 
 
-@app.post("/token", response_model=Token)
-async def login_for_access_token(username: str = Form(), password: str = Form()):
-    user = authenticate_user(conn, username, password)
+@app.post('/token', response_model=Token)
+async def login_for_access_token(input: Login):
+    user = authenticate_user(conn, input.username, input.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

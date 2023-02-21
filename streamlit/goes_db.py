@@ -3,9 +3,6 @@ import sqlite3
 import pandas as pd
 import requests
 
-conn = sqlite3.connect("s3_goes.db")
-cursor = conn.cursor()
-
 
 def query_into_dataframe():
     conn = sqlite3.connect("s3_goes.db")

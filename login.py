@@ -1,7 +1,6 @@
 import streamlit as st
 import sqlite3
 import hashlib
-# define a function to hash the password
 from jwt import app
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -18,7 +17,7 @@ def login():
         url = "http://localhost:8080/token"
         json_data = {"username": username, "password": password}
 
-        response = requests.post(url, (username,password))
+        response = requests.post(url,json=json_data)        
         if response.status_code == 200:
             st.success("Logged in as {}".format(username))
             return True # return True after a successful login
@@ -36,16 +35,9 @@ def show_geos():
     exec(open("streamlit/Geos.py").read())
 
 
-def test():
-        username = 'test'
-        password = 'test'
-        url = "http://localhost:8080/token"
 
-        response = requests.post(url, data=(username,password,))
-        print({"message":response.headers})
-# run the Streamlit app
 def main():
-    test()
+    # test()
     if login():
         show_main_app()
 
