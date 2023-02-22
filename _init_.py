@@ -1,3 +1,7 @@
-from jwt import conn,cursor
 
 
+
+def main():
+    print("hello")
+
+main()

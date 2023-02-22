@@ -62,7 +62,6 @@ def retrieve_metadata_NEXRAD(bucket):
                 ttprefix = tprefix + str(day[n]) + "/"
                 result = s3.list_objects_v2(Bucket=bucket, Prefix=ttprefix, Delimiter='/')
                 nexrad_station = create_list(result,3)
-                print(nexrad_station)
                 populate_db(year[i],month[j],day[n],nexrad_station)
 
 def populate_db(year,month, day,nexrad_station):
