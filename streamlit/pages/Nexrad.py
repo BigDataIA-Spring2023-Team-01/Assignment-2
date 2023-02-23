@@ -13,7 +13,7 @@ import time
 from nexrad_db import retieve_days,retieve_months,retieve_stations
 from url_generator import url_gen_nexrad,file_validator_nexrad
 from goes_db import log_file_download
-
+from fastapi import HTTPException
 # from IPython.core.display import display, HTML
 load_dotenv()
 
@@ -33,28 +33,6 @@ if st.session_state['access_token'] != '':
     with col1:
         st.header("Search using fields ")
 
-        
-        # check_file_exists
-        def check_file_exists(filename, bucket_name):
-            try:
-                s3client.head_object(Bucket=bucket_name, Key=filename)
-                return True
-            except Exception as e:
-                return False
-
-        #Transfer file to S3 bucket
-        def transfer_file_to_S3():
-            try:
-                st.write("Uploading the file to S3 bucket for download...")
-                with open(selected_file, "wb") as data:
-                    data.write(requests.get(final_url).content)
-                    s3client.upload_file(selected_file, USER_BUCKET_NAME, name_of_file)
-                    with st.spinner('Almost there...'):
-                        time.sleep(5)
-                        st.success('File was successfully uploaded!', icon="✅")
-                st.write('Click to download from S3 bucket', 'https://{}.s3.amazonaws.com/{}'.format(USER_BUCKET_NAME,name_of_file))
-            except Exception as e:
-                st.write("An error occurred:", str(e))
 
             
         def list_files_as_dropdown(bucket_name, prefix):
@@ -100,21 +78,19 @@ if st.session_state['access_token'] != '':
         if st.button('Submit'):
             with st.spinner('Retrieving details for the file you selected, wait for it....!'):
                 time.sleep(5)
-                
-                final_url = 'https://{}.s3.amazonaws.com/index.html#{}/{}/{}/{}/{}'.format(bucket,year_nexrad,month_of_year_nexrad,day_of_month_nexrad,selected_stationcode,selected_file)
-                name_of_file = selected_file
+                name_of_file = {"filename":selected_file}
                 if(selected_file != 'select'):
-                    if check_file_exists(name_of_file, USER_BUCKET_NAME):
-                        st.success(f"The file {name_of_file} already exists in the {USER_BUCKET_NAME} bucket.", icon="✅")
-
-                        st.write('Click to download from S3 bucket', 'https://{}.s3.amazonaws.com/{}'.format(USER_BUCKET_NAME,name_of_file))
-                        st.write('Link to file on GEOS website',url_gen_nexrad(name_of_file))
-                        timestamp = time.time()
-                        log_file_download(name_of_file,timestamp,bucket)
-                    else:
-                        st.write(f"The file {name_of_file} does not exist in the {USER_BUCKET_NAME} bucket.")
-                        transfer_file_to_S3()
-                        st.write('Link to file on GEOS website',url_gen_nexrad(name_of_file))
+                    try:
+                        url = 'http://localhost:8080/transfer_file_nexrad'
+                        headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
+                        response = requests.get(url,headers=headers,params=name_of_file)
+                        st.write(response.json)
+                    except any:
+                        print("Failed")
+                    timestamp = time.time()
+                    log_file_download(selected_file,timestamp,bucket)
+                    st.write(f"The file {name_of_file} does not exist in the {USER_BUCKET_NAME} bucket.")
+                
 
 
 
@@ -125,11 +101,21 @@ if st.session_state['access_token'] != '':
         st.header("Search using file name ")
             
         filename = st.text_input("Enter the filename:")
-        if filename:
-            url = 'http://localhost:8080/filename_url_gen_nexrad'
-            headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
-            response = requests.get(url,headers=headers)
-            st.write(response.json())
+        json_file_name = {"filename":filename}
+        if st.button('Get the Link'):
+            try:
+                url = 'http://localhost:8080/filename_url_gen_nexrad'
+                headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
+                response = requests.get(url,headers=headers,params=json_file_name)
+            except any:
+                print("Failed")
+
+            if(response.status_code == 200):
+                st.write(response.json()['url'])
+            elif(response.status_code == 400):
+                st.warning('Filename does not exist')
+            elif(response.status_code == 406):
+                st.warning('File name format is invalid')
 
             
 else:
