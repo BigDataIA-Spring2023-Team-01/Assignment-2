@@ -1,0 +1,1 @@
+url = uvicorn mainAPI:app --reload --port 8080

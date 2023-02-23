@@ -5,13 +5,13 @@ import requests
 
 
 def query_into_dataframe():
-    conn = sqlite3.connect("../data/s3_goes.dbo")
+    conn = sqlite3.connect("../data/s3_goes.db")
     cursor = conn.cursor()
     df = pd.read_sql_query("SELECT * FROM folders", conn)
     conn.close()
 
 def retieve_year():
-    conn = sqlite3.connect("../data/s3_goes.dbo")
+    conn = sqlite3.connect("../data/s3_goes.db")
     cursor = conn.cursor()
     query = "SELECT distinct year FROM folders"
     tdf = pd.read_sql_query(query, conn)
@@ -21,7 +21,7 @@ def retieve_year():
 
 
 def retieve_day_of_year(year):
-    conn = sqlite3.connect("../data/s3_goes.dbo")
+    conn = sqlite3.connect("../data/s3_goes.db")
     cursor = conn.cursor()
     query = "SELECT distinct day_of_year FROM folders where year = ?"
     tdf = pd.read_sql_query(query, conn,params=(year,))
@@ -30,7 +30,7 @@ def retieve_day_of_year(year):
     return tdf
 
 def retieve_hour(year,day_of_year):
-    conn = sqlite3.connect("../data/s3_goes.dbo")
+    conn = sqlite3.connect("../data/s3_goes.db")
     cursor = conn.cursor()
     query = "SELECT distinct hour FROM folders where year = ? and day_of_year = ?"
     tdf = pd.read_sql_query(query, conn,params=(year,day_of_year))

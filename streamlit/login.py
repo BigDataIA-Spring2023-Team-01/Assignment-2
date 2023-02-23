@@ -21,7 +21,7 @@ def login():
     username = st.text_input("Username",key="username")
     password = st.text_input("Password",type="password",key="password")
     if st.button("Login"):
-        url = "http://localhost:8020/token"
+        url = "http://localhost:8080/token"
         response = requests.post(url,data={"username": username, "password": password})        
         if response.status_code == 200:
             res = response.json()
@@ -38,7 +38,7 @@ def login():
 def show_main_app():
     # st.title("Main Application")
     # st.write("Welcome to the main application!")
-    url = "http://localhost:8020/users/me"
+    url = "http://localhost:8080/users/me"
     #token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjc3MTI5MTgwfQ.71FkTnZBGyLT1fbz0E0WQMMVFz2H_0injbiTZLVHBS0"
     headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
     response = requests.get(url, headers=headers)

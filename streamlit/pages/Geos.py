@@ -133,27 +133,12 @@ if st.session_state['access_token'] != '':
         st.header("Search using file name ")
         
         filename = st.text_input("Enter the filename:")
-        headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
-        response = requests.get('filename_url_gen_goes',headers=headers)
+        if filename:
+            url = 'http://localhost:8080/filename_url_gen_nexrad'
+            headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
+            response = requests.get(url,headers=headers)
+            st.write(response.json())
 
-
-            
-
-        def generate_url_from_filename():
-            # Get the filename entered by the user
-            flag = '1'
-            if st.button("Go to website"):
-                flag = file_validator(filename)
-                if (flag == '0'):
-                    with st.spinner('Fetching link to GEOS bucket and downloading...'):
-                        time.sleep(3)
-                        st.write("Link to the public GEOS Bucket is:",url_gen_goes(filename))
-                elif (flag == '1'):
-                    st.warning("Enter Valid file name")
-                elif (flag == '2') :
-                    st.warning("File not present in GOES Bucket")
-
-        generate_url_from_filename()
 
 else:
     st.warning("Login First")
