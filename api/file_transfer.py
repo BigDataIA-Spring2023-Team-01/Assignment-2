@@ -11,7 +11,7 @@ import sqlite3
 import requests
 import pandas as pd
 import numpy as np
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, APIRouter
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from typing import Optional
@@ -20,7 +20,7 @@ from typing import Dict, Any
 import boto3
 from fastapi import FastAPI
 
-app = FastAPI()
+router_file_transfer = APIRouter()
 s3client = boto3.client('s3',region_name='us-east-1',
                         aws_access_key_id = os.environ.get('AWS_ACCESS_KEY'),
                         aws_secret_access_key = os.environ.get('AWS_SECRET_KEY'))
@@ -80,7 +80,7 @@ def write_logs(message: str):
     ]   
 )   
 
-@app.get("/transfer_file")
+@router_file_transfer.get("/transfer_file")
 def transfer_file(filename: str):
     file_to_transfer = url_gen_goes(filename)
 
