@@ -31,7 +31,7 @@ class Geos_metadata(BaseModel):
 #---------------------------------------------------------------------------------------------------------------
 #
 
-router2 = APIRouter()
+router_metadata_geos = APIRouter()
 load_dotenv()
 s3 = boto3.client('s3',region_name='us-east-1',
                             aws_access_key_id = os.environ.get('AWS_ACCESS_KEY'),
@@ -115,7 +115,7 @@ def populate_db(year, day_of_year,hour):
 
 
 
-@router2.get("/retrieve_metadata/geos", response_model=Token)
+@router_metadata_geos.get("/retrieve_metadata/geos", response_model=Token)
 async def retrieve_metadata_geos():
     
     bucket = 'noaa-goes18'

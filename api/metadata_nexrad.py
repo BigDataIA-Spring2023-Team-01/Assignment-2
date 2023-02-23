@@ -31,7 +31,7 @@ class Nexrad_metadata(BaseModel):
 #---------------------------------------------------------------------------------------------------------------
 #
 
-router3 = APIRouter()
+router_metadata_nexrad = APIRouter()
 load_dotenv()
 s3 = boto3.client('s3',region_name='us-east-1',
                             aws_access_key_id = os.environ.get('AWS_ACCESS_KEY'),
@@ -101,7 +101,7 @@ def populate_db(year,month, day,nexrad_station):
 
 
 
-@router3.get("/retrieve_metadata/nexrad", response_model=Token)
+@router_metadata_nexrad.get("/retrieve_metadata/nexrad", response_model=Token)
 async def retrieve_metadata_nexrad():
     
     cursor.execute("CREATE TABLE IF NOT EXISTS folders (year text, month text, day text,nexrad_station text)")

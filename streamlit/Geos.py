@@ -13,12 +13,16 @@ import time
 import sys
 from goes_db import log_file_download,retieve_year, retieve_day_of_year,retieve_hour
 from url_generator import file_validator,url_gen_goes
-st.header("Explore the GEOS-18 Dataset")
 load_dotenv()
 
 s3client = boto3.client('s3',region_name='us-east-1',
                         aws_access_key_id = os.environ.get('AWS_ACCESS_KEY'),
                         aws_secret_access_key = os.environ.get('AWS_SECRET_KEY'))
+
+
+
+
+st.header("Explore the GEOS-18 Dataset")
 
 bucket = 'noaa-goes18'
 prefix = 'ABI-L1b-RadC/'

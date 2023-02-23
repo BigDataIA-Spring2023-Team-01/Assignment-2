@@ -46,7 +46,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-router1 = APIRouter()
+router_jwt = APIRouter()
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -110,8 +110,8 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     return current_user
 
 
-@router1.post('/token', response_model=Token)
-async def login_for_access_token(input: Login):
+@router_jwt.post('/token', response_model=Token)
+async def login_for_access_token(input: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(conn, input.username, input.password)
     if not user:
         raise HTTPException(
@@ -126,11 +126,11 @@ async def login_for_access_token(input: Login):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@router1.get("/users/me/", response_model=User)
+@router_jwt.get("/users/me/", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
 
 
-@router1.get("/users/me/items/")
+@router_jwt.get("/users/me/items/")
 async def read_own_items(current_user: User = Depends(get_current_active_user)):
     return [{"item_id": "Foo", "owner": current_user.username}]

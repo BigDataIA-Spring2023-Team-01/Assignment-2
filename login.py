@@ -1,25 +1,39 @@
 import streamlit as st
 import sqlite3
 import hashlib
-from .api.jwt import app
 from jose import JWTError, jwt
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import requests
-
+from fastapi import Form
 # define the Streamlit login page
+from pydantic import BaseModel
+
+
+
+class Login:
+    username:str = Form()
+    password:str = Form()
+
 def login():
     st.title("Login")
     oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
     username = st.text_input("Username",key="username")
-    password = st.text_input("Password",key="password")
+    password = st.text_input("Password",type="password",key="password")
     if st.button("Login"):
-        url = "http://localhost:8081/token"
-        json_data = {"username": username, "password": password}
-
-        response = requests.post(url,json=json_data)        
+        url = "http://localhost:8040/token"
+        json_data = {
+            "username":'test',
+            "password":'test'
+        }
+        response = requests.post(url,data={"username": username, "password": password})        
         if response.status_code == 200:
+            res = response.json()
+            access_token = res['access_token']
+            if 'access_token' not in st.session_state:
+                st.session_state['access_token'] = access_token
             st.success("Logged in as {}".format(username))
+            st.write(type(access_token))
             return True # return True after a successful login
         else:
             st.error("Invalid username or password")
@@ -29,9 +43,9 @@ def login():
 def show_main_app():
     # st.title("Main Application")
     # st.write("Welcome to the main application!")
-    url = "http://127.0.0.1:8081/users/me/"
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjc3MDI3ODMyfQ.VuRXFA7PKK8srafLP_7KL70CYv5YJNu99hhnmpWFDX4"
-    headers = {"Authorization": f"Bearer {token}"}
+    url = "http://localhost:8040/users/me"
+    #token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjc3MTI5MTgwfQ.71FkTnZBGyLT1fbz0E0WQMMVFz2H_0injbiTZLVHBS0"
+    headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
     response = requests.get(url, headers=headers)
 
     # check response
@@ -44,16 +58,10 @@ def show_main_app():
 def show_geos():
     exec(open("streamlit/Geos.py").read())
 
-def navigate_to_page(page_name):
-    query_params = {"page": page_name}
-    st.experimental_set_query_params(**query_params)
 
 def main():
-    # test()
     if login():
-        st.write("Loading")
-        # navigate_to_page("streamlit/Geos.py")   
-    # show_main_app()
+        show_main_app()
 
 if __name__ == "__main__":
     main()
