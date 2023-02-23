@@ -11,7 +11,6 @@ import requests
 from bs4 import BeautifulSoup
 import time
 import sys
-sys.path.insert(1, '/home/chromite/projects/Assignment-2/streamlit')
 from goes_db import log_file_download,retieve_year, retieve_day_of_year,retieve_hour
 from url_generator import file_validator,url_gen_goes
 st.header("Explore the GEOS-18 Dataset")

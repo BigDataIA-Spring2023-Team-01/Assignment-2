@@ -9,7 +9,7 @@ CREATE TABLE if not exists login (
 
 DELETE FROM login;
 
-INSERT INTO login VALUES('test','test@gmail.com','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08','active');
-INSERT INTO login VALUES('test1','test1@gmail.com','1b4f0e9851971998e732078544c96b36c3d01cedf7caa332359d6f1d83567014','inactive');
-INSERT INTO login VALUES('test2','test2@gmail.com','test2','disabled');
-INSERT INTO login VALUES('test3','test3@gmail.com','test3','disabled');
+INSERT INTO login VALUES('test','test@gmail.com','$2b$12$E2h35wKPuFb3Vr8uC6Du8uzukmu0f2wM44uzm.UthGjKzKHEiMZNK','active');
+INSERT INTO login VALUES('damg7245','damg@gmail.com','$2b$12$yJ/iddK8UQjzx0oC3M/WteYutgmtGgub8uukDPZHj4gkk69hN97Jy','active');
+INSERT INTO login VALUES('test1','test1@gmail.com','$2b$12$l7JWANZU3dr3/sQXx18FBu.oH6LMBeJy9EKuF/YcK0nFQ3N6UbZx6','inactive');
+INSERT INTO login VALUES('test_disabled','test_disabled@gmail.com','$2b$12$reKZJlqbGQNOfEm8cWJpK.AkU8OxGoQcv6sJsos1A9fGiYzimXV9m','disabled');

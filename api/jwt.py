@@ -1,7 +1,6 @@
 from datetime import datetime, timedelta
 from exceptiongroup import catch
-
-from fastapi import Depends, FastAPI, HTTPException, status,Form
+from fastapi import Depends, FastAPI, HTTPException, status,Form, APIRouter
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -16,7 +15,7 @@ SECRET_KEY = "e1b6b2c8f1669af6ac695ebb7b3e979b519cdd831a54be0a112c1904c43f3cc7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-conn = sqlite3.connect('/home/chromite/projects/Assignment-2/data/login.dbo')
+conn = sqlite3.connect('../data/login.dbo')
 db = Database(conn)
 cursor = conn.cursor()
 
@@ -47,8 +46,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-app = FastAPI()
-
+router1 = APIRouter()
 
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
@@ -107,12 +105,12 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
-    if current_user.disabled:
+    if current_user.status == 'inactive':
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
 
 
-@app.post('/token', response_model=Token)
+@router1.post('/token', response_model=Token)
 async def login_for_access_token(input: Login):
     user = authenticate_user(conn, input.username, input.password)
     if not user:
@@ -128,11 +126,11 @@ async def login_for_access_token(input: Login):
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-@app.get("/users/me/", response_model=User)
+@router1.get("/users/me/", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     return current_user
 
 
-@app.get("/users/me/items/")
+@router1.get("/users/me/items/")
 async def read_own_items(current_user: User = Depends(get_current_active_user)):
     return [{"item_id": "Foo", "owner": current_user.username}]
