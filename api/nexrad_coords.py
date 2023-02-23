@@ -1,21 +1,17 @@
 import sqlite3
-from fastapi import FastAPI
+from fastapi import FastAPI,APIRouter
 import uvicorn
 import pandas as pd
 import numpy as np
 
 
 
-app = FastAPI()
+router_nexrad_coords = APIRouter()
 
-
-
-@app.get("/coordinatesdata")
-async def get_data_of_coordinates():
-    conn = sqlite3.connect('../data/ddl.dbo')
-    cursor = conn.cursor()
-    def convert_coordinates(coordinates):
-    
+def convert_coordinates(coordinates):
+        
+        latarray=[]
+        longarray=[]
         individual_coordinates = coordinates.split(" ")
         latitude = individual_coordinates[0]
         longitude = individual_coordinates[1]
@@ -31,29 +27,41 @@ async def get_data_of_coordinates():
             longitude = longitude[:-2]
         latarray.append(float(latitude))
         longarray.append(float(longitude))
-    
+
+        return [latarray, longarray]
+
+@router_nexrad_coords.get("/coordinatesdata")
+async def get_data_of_coordinates():
+    conn = sqlite3.connect("../data/ddl.dbo")
+    cursor = conn.cursor()
     
     latarray=[]
     longarray=[]
     
 
+
     # Check if the table exists
     table_name = "coordinates"
     cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{table_name}'")
     if cursor.fetchone():
+        final_arr_lat,final_arr_long = [],[]
         print("Table Exists")
         query = "SELECT Coordinates FROM coordinates"
         cursor.execute(query)
         results = cursor.fetchall()
-        
         for row in results:
-            convert_coordinates(row[0])
-        return{"latitude":latarray,"longitude":longarray}
+            r= convert_coordinates(row[0])
+            final_arr_lat.append(r[0][0])
+            final_arr_long.append(r[1][0])
+
+        
+        return{"latitude":final_arr_lat,"longitude":final_arr_long}
 
 
     else:
         print(f"Table '{table_name}' does not exist")
-        
+        final_arr = []
+
 
         # Create the table
         cursor.execute("""
@@ -75,14 +83,13 @@ async def get_data_of_coordinates():
         rows = cursor.fetchall()
 
 
-        for row in rows:
-            convert_coordinates(row[0])
-        return{"latitude":latarray,"longitude":longarray}
+        for row in results:
+            r= convert_coordinates(row[0])
+            final_arr_lat.append(r[0])
+            final_arr_long.append(r[1])
+        print(final_arr_lat,final_arr_lat)
+        return{"latitude":final_arr_lat,"longitude":final_arr_lat}
+
         
     conn.close()
 
-
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="10.0.0.17", port=8000)
