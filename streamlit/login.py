@@ -8,7 +8,7 @@ from fastapi import Form
 # define the Streamlit login page
 from pydantic import BaseModel
 
-
+st.session_state['access_token']= ''
 
 class Login:
     username:str = Form()
@@ -21,17 +21,12 @@ def login():
     username = st.text_input("Username",key="username")
     password = st.text_input("Password",type="password",key="password")
     if st.button("Login"):
-        url = "http://localhost:8040/token"
-        json_data = {
-            "username":'test',
-            "password":'test'
-        }
+        url = "http://localhost:8020/token"
         response = requests.post(url,data={"username": username, "password": password})        
         if response.status_code == 200:
             res = response.json()
             access_token = res['access_token']
-            if 'access_token' not in st.session_state:
-                st.session_state['access_token'] = access_token
+            st.session_state['access_token'] = access_token
             st.success("Logged in as {}".format(username))
             st.write(type(access_token))
             return True # return True after a successful login
@@ -43,7 +38,7 @@ def login():
 def show_main_app():
     # st.title("Main Application")
     # st.write("Welcome to the main application!")
-    url = "http://localhost:8040/users/me"
+    url = "http://localhost:8020/users/me"
     #token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0IiwiZXhwIjoxNjc3MTI5MTgwfQ.71FkTnZBGyLT1fbz0E0WQMMVFz2H_0injbiTZLVHBS0"
     headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
     response = requests.get(url, headers=headers)
@@ -55,13 +50,13 @@ def show_main_app():
         print("Request failed with status code:", response.status_code)
         # add the rest of your application code here
 
-def show_geos():
-    exec(open("streamlit/Geos.py").read())
+
 
 
 def main():
     if login():
-        show_main_app()
+        print("great")
+
 
 if __name__ == "__main__":
     main()
