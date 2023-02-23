@@ -16,8 +16,6 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from typing import Optional
 from urllib.parse import quote
-# from Geos import generate_url_from_filename
-# from url_generator import file_validator
 from typing import Dict, Any
 
 app = FastAPI()
