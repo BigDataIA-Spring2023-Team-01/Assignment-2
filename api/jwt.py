@@ -15,7 +15,7 @@ SECRET_KEY = "e1b6b2c8f1669af6ac695ebb7b3e979b519cdd831a54be0a112c1904c43f3cc7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-conn = sqlite3.connect('../data/login.dbo')
+conn = sqlite3.connect('data/login.dbo')
 db = Database(conn)
 cursor = conn.cursor()
 

@@ -19,8 +19,8 @@ from urllib.parse import quote
 from typing import Dict, Any
 import boto3
 from fastapi import FastAPI
-import jwt
-
+import api.jwt
+jwt = api.jwt
 router_file_transfer = APIRouter()
 s3client = boto3.client('s3',region_name='us-east-1',
                         aws_access_key_id = os.environ.get('AWS_ACCESS_KEY'),
