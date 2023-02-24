@@ -16,7 +16,7 @@ router_file_url_generator = file_url_generator.router_file_url_generator
 
 client = TestClient(router_file_url_generator)
 # URL = str(os.environ.get('URL')) + 'filename_url_gen_nexrad'
-URL ='http://fastapi.latest:8080/filename_url_gen_nexrad'
+URL ='http://localhost:8080/filename_url_gen_nexrad'
 
 #def url_gen_nexrad(input):
 #    arr = input.split("_")[0]
