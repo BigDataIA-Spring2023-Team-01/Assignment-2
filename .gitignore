@@ -13,3 +13,4 @@ great_expectations/uncommitted/config_variables.yml
 great_expectations/uncommitted/validations
 
 *.pyc
+airflow/logs/scheduler/latest
