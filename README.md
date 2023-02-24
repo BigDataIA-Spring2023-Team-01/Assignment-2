@@ -1,5 +1,8 @@
 # Assignment-2
 
+
+
+
 Reference:
 
 ## api folder /api
@@ -28,6 +31,10 @@ This contains all the streamlit pages and use the api calls from /api folder to 
  5. Activate the virtual environment and download the requirements.txt using
  ````
   pip install -r /path/to/requirements.txt
+ ````
+6. User docker compose to run both FastAPI and Streamlit containers.
+ ````
+  docker compose up -d --build
  ````
  
  ## Declaration 
