@@ -53,7 +53,7 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/fastapi:${{ steps.commit.outputs.short }}
           # Change the container image "demo_fastapi_private"
       -
-      name: Build and push Streamlit
+        name: Build and push Streamlit
         uses: docker/build-push-action@v4
         with:
           context: ./streamlit    # path to dockerfile
