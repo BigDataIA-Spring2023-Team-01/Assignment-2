@@ -7,6 +7,7 @@ import requests
 from fastapi import Form
 # define the Streamlit login page
 from pydantic import BaseModel
+import os
 
 st.session_state['access_token']= ''
 
@@ -21,7 +22,7 @@ def login():
     username = st.text_input("Username",key="username")
     password = st.text_input("Password",type="password",key="password")
     if st.button("Login"):
-        url = "http://localhost:8080/token"
+        url = str(os.environ.get('URL')) + "token"
         response = requests.post(url,data={"username": username, "password": password})        
         if response.status_code == 200:
             res = response.json()

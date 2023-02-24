@@ -152,17 +152,17 @@ def filename_url_gen_nexrad(filename: str) -> Dict[str, Any]:
 
 
 @router_file_url_generator.get('/url_generator_geos')
-def url_gen_goes(input:str, current_user: User = Depends(get_current_active_user)):
-    write_logs(message="url_generator_starts")
+def url_gen_goes(input:str):
+    # write_logs(message="url_generator_starts")
     arr = input.split("_")
     tproduct_code = arr[1].split("-")
     s1 = tproduct_code[2]
     finalProductCode =tproduct_code[0]+"-"+tproduct_code[1]+"-"+ ''.join([i for i in s1 if not i.isdigit()])
-    write_logs(finalProductCode)
+    # write_logs(finalProductCode)
     date = arr[3]
     year, day_of_year, hour = date[1:5], date[5:8], date[8:10]
     fs = "https://noaa-goes18.s3.amazonaws.com/{}/{}/{}/{}/{}".format(finalProductCode,year,day_of_year,hour,input)
-    write_logs(fs)
+    # write_logs(fs)
     return {"url":fs}
 
 

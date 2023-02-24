@@ -4,7 +4,7 @@ WORKDIR /ass2
 
 COPY . .
 
-RUN pip install --no-cache-dir --upgrade -r /ass2/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 
 EXPOSE 8080
 
