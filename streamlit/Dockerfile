@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
 
 COPY . .
 
+ADD requirements.txt /ass2/
+
 RUN pip install --no-cache-dir --upgrade -r /ass2/requirements.txt
 
 EXPOSE 8501
