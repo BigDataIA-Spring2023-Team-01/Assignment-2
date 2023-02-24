@@ -97,7 +97,7 @@ def check_file_in_S3public_geos(filename: str):
             return False
             
 @router_file_url_generator.get("/filename_url_gen_goes")
-def filename_url_gen_goes(filename: str) -> Dict[str, Any]:
+def filename_url_gen_goes(filename: str):
     # define the expected format for the file name
     expected_format = "OR_ABI-L1b-RadC-M6C01_G18_s{year}{day}{hour}{time}_{end_time}_c{creation_time}.nc"
 

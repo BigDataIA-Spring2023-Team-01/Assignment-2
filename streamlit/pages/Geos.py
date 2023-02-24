@@ -114,7 +114,7 @@ if st.session_state['access_token'] != '':
                 st.error("An error occured")
             data = response.json()
             if(response.status_code == 200):
-                st.write(data['url'])
+                st.write("S3 Public GOES Bucket Link:",data['url'])
             elif(response.status_code == 400):
                 st.warning('Filename does not exist')
             elif(response.status_code == 406):
