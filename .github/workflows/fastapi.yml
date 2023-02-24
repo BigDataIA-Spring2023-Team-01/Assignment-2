@@ -28,6 +28,7 @@ jobs:
         name: Run tests
         working-directory: ./
         run: |
+          pip install pytest
           python -m pytest pytest/file_url_generator_test_nexrad.py                                
           python -m pytest pytest/file_url_generator_test_geos.py                                
 
