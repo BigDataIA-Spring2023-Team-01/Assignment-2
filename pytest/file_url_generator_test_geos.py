@@ -14,7 +14,8 @@ load_dotenv()
 router_file_url_generator = file_url_generator.router_file_url_generator
 
 client = TestClient(router_file_url_generator)
-URL = str(os.environ.get('URL')) + 'filename_url_gen_geos'
+#URL = str(os.environ.get('URL')) + 'filename_url_gen_geos'
+URL ='http://fastapi.latest:8080/filename_url_gen_geos'
 
 #def url_gen_goes(input):
 #    arr = input.split("_")
@@ -122,3 +123,4 @@ def test_url_gen12():
  test_fs_T12 = client.get(URL, params={"filename": test})
  assert test_fs_T12.status_code == 200
  assert(test_fs_T12.json() == {"url":EXCEL_URL_T12})
+
