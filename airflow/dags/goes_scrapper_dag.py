@@ -22,8 +22,10 @@ from great_expectations.data_context.types.base import (
 
 
 #load env variables
+
 dotenv_path = Path('./dags/.env')
 load_dotenv(dotenv_path=dotenv_path)
+
 
 #authenticate S3 client with your user credentials that are stored in your .env config file
 s3client = boto3.client('s3',
@@ -126,38 +128,50 @@ with dag:
 
     get_goes18_metadata = PythonOperator(
         task_id = 'scrape_goes18_data',
-        python_callable = scrape_goes18_data
+        python_callable = scrape_goes18_data,
+        start_date=days_ago(0)
+
     )
 
    
     export_to_csv = PythonOperator(
         task_id = 'export_db',
-        python_callable = export_db
+        python_callable = export_db,
+        start_date=days_ago(0)
+
     )
     
     get_goes18_metadata >> export_to_csv
 
-## GREAT EXPECTATIONS USING AIRFLOW -
+# ## GREAT EXPECTATIONS USING AIRFLOW -
 
-great_expectations_dag = DAG(
-    'GE_dag', 
-    #default_args=default_args, 
-    schedule_interval=timedelta(days=1)
-    )
-ge_root_dir=os.path.join(os.path.dirname(__file__),"..","great-expectation/expectations")
-GE_goes1st = GreatExpectationsOperator(
-    task_id="goes18_run_data_validation",
-    data_context_root_dir=ge_root_dir,
-    checkpoint_name="goes18_check_point.yml",
-    dag=great_expectations_dag
-)
+# great_expectations_dag = DAG(
+#     'GE_dag', 
+#     #default_args=default_args, 
+#     schedule_interval=timedelta(days=1),
+#     start_date=days_ago(0),
+#     catchup = False
 
-GE_goes2nd = GreatExpectationsOperator(
-    task_id="great_expectations_config",
-    data_context_config="great_expectations.yml",
-    checkpoint_config="goes18_check_point.yml",
-    dag=great_expectations_dag
-)
+#     )
+# ge_root_dir=os.path.join(os.path.dirname(__file__),"..","great-expectation/expectations")
+# GE_goes1st = GreatExpectationsOperator(
+#     task_id="goes18_run_data_validation",
+#     data_context_root_dir=ge_root_dir,
+#     checkpoint_name="goes18_check_point.yml",
+#     dag=great_expectations_dag,
+#     start_date=days_ago(0)
 
-GE_goes1st >> GE_goes2nd 
+
+# )
+
+# GE_goes2nd = GreatExpectationsOperator(
+#     task_id="great_expectations_config",
+#     data_context_config="great_expectations.yml",
+#     checkpoint_config="goes18_check_point.yml",
+#     dag=great_expectations_dag,
+#     dag=great_expectations_dag
+
+# )
+
+# GE_goes1st >> GE_goes2nd 
 
