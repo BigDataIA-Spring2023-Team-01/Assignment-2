@@ -28,7 +28,8 @@ jobs:
         working-directory: ./pytest
         run: |
           pipenv install -r requirements.txt
-          pipenv run pytest -v                          
+          Py.test file_url_generator_test_geos.py    
+          Py.test file_url_generator_test_nexrad.py                       
         # Running pytest
       -
         name: Login to Docker Hub
