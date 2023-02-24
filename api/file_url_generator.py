@@ -17,9 +17,12 @@ from fastapi.templating import Jinja2Templates
 from typing import Optional
 from urllib.parse import quote
 from typing import Dict, Any
-import jwt
+import api.jwt
+jwt = api.jwt
 User = jwt.User
 get_current_active_user = jwt.get_current_active_user
+
+
 router_file_url_generator = APIRouter()
 
 clientlogs = boto3.client('logs',
@@ -94,7 +97,7 @@ def check_file_in_S3public_geos(filename: str):
             return False
             
 @router_file_url_generator.get("/filename_url_gen_goes")
-def filename_url_gen_goes(filename: str,current_user: User = Depends(get_current_active_user)) -> Dict[str, Any]:
+def filename_url_gen_goes(filename: str) -> Dict[str, Any]:
     # define the expected format for the file name
     expected_format = "OR_ABI-L1b-RadC-M6C01_G18_s{year}{day}{hour}{time}_{end_time}_c{creation_time}.nc"
 
@@ -126,7 +129,7 @@ def filename_url_gen_goes(filename: str,current_user: User = Depends(get_current
     
 
 @router_file_url_generator.get("/filename_url_gen_nexrad")
-def filename_url_gen_nexrad(filename: str,current_user: User = Depends(get_current_active_user)) -> Dict[str, Any]:
+def filename_url_gen_nexrad(filename: str) -> Dict[str, Any]:
 
     # expected_format = "{nexrad_station}{year}{month}{day}_{time}_V06"
     pattern = r'^\w{4}\d{8}_\d{6}(?:_V06|_V03)?(?:\.gz)?$'

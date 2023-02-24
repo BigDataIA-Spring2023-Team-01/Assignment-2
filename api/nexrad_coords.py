@@ -3,7 +3,8 @@ from fastapi import FastAPI,APIRouter
 import uvicorn
 import pandas as pd
 import numpy as np
-import jwt
+import api.jwt
+jwt = api.jwt
 
 
 router_nexrad_coords = APIRouter()

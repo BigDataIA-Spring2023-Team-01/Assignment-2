@@ -12,8 +12,8 @@ from dotenv import load_dotenv
 import boto3
 import time
 import pandas as pd
-import jwt
-
+import api.jwt
+jwt = api.jwt
 #---------------------------------------------------------------------------------------------------------------
 #                            Class Declarations
 #---------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ clientlogs = boto3.client('logs',
                             aws_access_key_id = os.environ.get('AWS_ACCESS_KEY'),
                             aws_secret_access_key = os.environ.get('AWS_SECRET_KEY')
                             )
-conn = sqlite3.connect("../data/s3_nexrad.dbo")
+conn = sqlite3.connect("data/s3_nexrad.dbo")
 cursor = conn.cursor()
 
 
