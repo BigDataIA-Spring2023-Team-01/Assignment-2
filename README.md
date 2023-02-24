@@ -1,6 +1,6 @@
 # Assignment-2
 
-
+[![fastapi-ci](https://github.com/BigDataIA-Spring2023-Team-01/Assignment-2/actions/workflows/fastapi.yml/badge.svg)](https://github.com/BigDataIA-Spring2023-Team-01/Assignment-2/actions/workflows/fastapi.yml)
 
 
 Reference:
