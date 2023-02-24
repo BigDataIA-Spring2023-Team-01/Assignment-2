@@ -13,6 +13,13 @@ import time
 import pandas as pd
 from pathlib import Path
 from dotenv import load_dotenv
+from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
+from great_expectations.core.batch import BatchRequest
+from great_expectations.data_context.types.base import (
+    DataContextConfig,
+    CheckpointConfig
+)
+ 
 
 #load env variables
 dotenv_path = Path('./dags/.env')
@@ -130,3 +137,26 @@ with dag:
     )
     
     get_nexrad_metadata >> export_to_csv
+
+# GE using airflow
+great_expectations_dag = DAG(
+    'GE_dag', 
+    #default_args=default_args, 
+    schedule_interval=timedelta(days=1)
+    )
+ge_root_dir=os.path.join(os.path.dirname(__file__),"..","great-expectation/great-expectation")
+GE_nexrad1st = GreatExpectationsOperator(
+    task_id="nexrad_run_data_validation",
+    data_context_root_dir=ge_root_dir,
+    checkpoint_name="nexrad_checkpoint.yml",
+    dag=great_expectations_dag
+)
+
+GE_nexrad2nd = GreatExpectationsOperator(
+    task_id="great_expectations_config",
+    data_context_config="great_expectations.yml",
+    checkpoint_config="nexrad_checkpoint.yml",
+    dag=great_expectations_dag
+)
+GE_nexrad1st >>  GE_nexrad2nd
+
