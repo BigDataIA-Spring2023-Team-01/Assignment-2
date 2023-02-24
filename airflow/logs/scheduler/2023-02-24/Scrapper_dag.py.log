@@ -1,0 +1,94 @@
+[2023-02-24T01:56:26.393+0000] {processor.py:153} INFO - Started process (PID=1188) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:56:26.437+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T01:56:26.506+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:56:26.503+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:56:31.723+0000] {processor.py:753} INFO - DAG(s) dict_keys(['main']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:56:37.560+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:56:37.552+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T01:56:39.194+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:56:39.185+0000] {dag.py:3441} INFO - Setting next_dagrun for main to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T01:56:40.249+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 16.291 seconds
+[2023-02-24T01:57:43.115+0000] {processor.py:153} INFO - Started process (PID=1213) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:57:43.137+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T01:57:43.222+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:57:43.202+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:57:45.879+0000] {processor.py:753} INFO - DAG(s) dict_keys(['main']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:57:48.006+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:57:47.989+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T01:57:49.693+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:57:49.683+0000] {dag.py:3441} INFO - Setting next_dagrun for main to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T01:57:50.122+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 7.683 seconds
+[2023-02-24T01:58:20.602+0000] {processor.py:153} INFO - Started process (PID=1245) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:58:20.612+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T01:58:20.619+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:58:20.618+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:58:20.857+0000] {processor.py:753} INFO - DAG(s) dict_keys(['main']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:58:21.251+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:58:21.250+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T01:58:21.470+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:58:21.469+0000] {dag.py:3441} INFO - Setting next_dagrun for main to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T01:58:21.636+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 1.141 seconds
+[2023-02-24T01:58:52.471+0000] {processor.py:153} INFO - Started process (PID=1276) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:58:52.507+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T01:58:52.567+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:58:52.565+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:58:53.305+0000] {processor.py:753} INFO - DAG(s) dict_keys(['main']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:58:54.822+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:58:54.821+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T01:58:55.219+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:58:55.219+0000] {dag.py:3441} INFO - Setting next_dagrun for main to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T01:58:55.507+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 3.088 seconds
+[2023-02-24T01:59:25.681+0000] {processor.py:153} INFO - Started process (PID=1301) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:59:25.685+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T01:59:25.690+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:59:25.689+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:59:25.980+0000] {processor.py:753} INFO - DAG(s) dict_keys(['main']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T01:59:26.374+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:59:26.374+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T01:59:26.670+0000] {logging_mixin.py:137} INFO - [2023-02-24T01:59:26.670+0000] {dag.py:3441} INFO - Setting next_dagrun for main to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T01:59:26.844+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 1.198 seconds
+[2023-02-24T02:02:31.703+0000] {processor.py:153} INFO - Started process (PID=1318) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:03:22.984+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T02:05:00.164+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:04:35.689+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:07:50.558+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:07:22.904+0000] {timeout.py:68} ERROR - Process timed out, PID: 1318
+[2023-02-24T02:13:42.741+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:08:21.081+0000] {dagbag.py:343} ERROR - Failed to import: /opt/airflow/dags/Scrapper_dag.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/models/dagbag.py", line 339, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 728, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/opt/airflow/dags/Scrapper_dag.py", line 2, in <module>
+    from airflow.operators.bash import BashOperator
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 963, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 906, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1272, in find_spec
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 69, in handle_timeout
+    raise AirflowTaskTimeout(self.error_message)
+airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/Scrapper_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.5.1/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.5.1/best-practices.html#reducing-dag-complexity, PID: 1318
+[2023-02-24T02:13:44.758+0000] {processor.py:755} WARNING - No viable dags retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:15:58.968+0000] {processor.py:153} INFO - Started process (PID=1319) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:15:59.068+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T02:15:59.193+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:15:59.191+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:16:42.794+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:16:42.786+0000] {timeout.py:68} ERROR - Process timed out, PID: 1319
+[2023-02-24T02:16:42.798+0000] {logging_mixin.py:137} WARNING - Exception ignored in: <function WeakKeyDictionary.__init__.<locals>.remove at 0x7f2891d7ad40>
+[2023-02-24T02:16:42.800+0000] {logging_mixin.py:137} WARNING - Traceback (most recent call last):
+[2023-02-24T02:16:42.809+0000] {logging_mixin.py:137} WARNING -   File "/usr/local/lib/python3.7/weakref.py", line 358, in remove
+[2023-02-24T02:16:42.813+0000] {logging_mixin.py:137} WARNING -     def remove(k, selfref=ref(self)):
+[2023-02-24T02:16:42.817+0000] {logging_mixin.py:137} WARNING -   File "/home/airflow/.local/lib/python3.7/site-packages/airflow/utils/timeout.py", line 69, in handle_timeout
+[2023-02-24T02:16:42.826+0000] {logging_mixin.py:137} WARNING -     raise AirflowTaskTimeout(self.error_message)
+[2023-02-24T02:16:42.827+0000] {logging_mixin.py:137} WARNING - airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/Scrapper_dag.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.5.1/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.5.1/best-practices.html#reducing-dag-complexity, PID: 1319
+[2023-02-24T02:16:44.853+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Scrapper']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:16:45.783+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:16:45.782+0000] {manager.py:504} INFO - Created Permission View: can edit on DAG:Scrapper
+[2023-02-24T02:16:45.851+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:16:45.850+0000] {manager.py:504} INFO - Created Permission View: can delete on DAG:Scrapper
+[2023-02-24T02:16:45.891+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:16:45.891+0000] {manager.py:504} INFO - Created Permission View: can read on DAG:Scrapper
+[2023-02-24T02:16:45.894+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:16:45.893+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T02:16:45.986+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:16:45.986+0000] {dag.py:2711} INFO - Creating ORM DAG for Scrapper
+[2023-02-24T02:16:46.081+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:16:46.080+0000] {dag.py:3441} INFO - Setting next_dagrun for Scrapper to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T02:16:46.215+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 47.637 seconds
+[2023-02-24T02:17:17.121+0000] {processor.py:153} INFO - Started process (PID=1378) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:17:17.136+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T02:17:17.159+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:17:17.154+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:17:23.885+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Scrapper']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:17:24.147+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:17:24.145+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T02:17:24.371+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:17:24.371+0000] {dag.py:3441} INFO - Setting next_dagrun for Scrapper to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T02:17:24.507+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 7.559 seconds
+[2023-02-24T02:17:55.373+0000] {processor.py:153} INFO - Started process (PID=1419) to work on /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:17:55.377+0000] {processor.py:743} INFO - Processing file /opt/airflow/dags/Scrapper_dag.py for tasks to queue
+[2023-02-24T02:17:55.380+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:17:55.380+0000] {dagbag.py:538} INFO - Filling up the DagBag from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:18:00.636+0000] {processor.py:753} INFO - DAG(s) dict_keys(['Scrapper']) retrieved from /opt/airflow/dags/Scrapper_dag.py
+[2023-02-24T02:18:00.885+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:18:00.884+0000] {dag.py:2690} INFO - Sync 1 DAGs
+[2023-02-24T02:18:01.073+0000] {logging_mixin.py:137} INFO - [2023-02-24T02:18:01.072+0000] {dag.py:3441} INFO - Setting next_dagrun for Scrapper to 2023-02-24T00:00:00+00:00, run_after=2023-02-25T00:00:00+00:00
+[2023-02-24T02:18:01.177+0000] {processor.py:175} INFO - Processing /opt/airflow/dags/Scrapper_dag.py took 5.833 seconds
