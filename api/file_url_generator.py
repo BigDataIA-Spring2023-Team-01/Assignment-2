@@ -152,7 +152,7 @@ def filename_url_gen_nexrad(filename: str) -> Dict[str, Any]:
 
 
 @router_file_url_generator.get('/url_generator_geos')
-def url_gen_goes(input:str, current_user: User = Depends(get_current_active_user)):
+def url_gen_goes(input:str):
     write_logs(message="url_generator_starts")
     arr = input.split("_")
     tproduct_code = arr[1].split("-")
