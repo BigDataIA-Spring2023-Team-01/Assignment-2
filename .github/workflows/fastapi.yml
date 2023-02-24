@@ -27,7 +27,7 @@ jobs:
         name: Run tests
         working-directory: ./
         run: |
-          pipenv install -r requirements.txt
+          pipenv install -r pytest/requirements.txt
           pytest ./pytest                      
         # Running pytest
       -
