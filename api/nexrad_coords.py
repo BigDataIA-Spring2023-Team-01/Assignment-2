@@ -33,7 +33,7 @@ def convert_coordinates(coordinates):
 
 @router_nexrad_coords.get("/coordinatesdata")
 async def get_data_of_coordinates(current_user: jwt.User = jwt.Depends(jwt.get_current_active_user)):
-    conn = sqlite3.connect("../data/ddl.dbo")
+    conn = sqlite3.connect("data/ddl.dbo")
     cursor = conn.cursor()
     
     latarray=[]
@@ -75,7 +75,7 @@ async def get_data_of_coordinates(current_user: jwt.User = jwt.Depends(jwt.get_c
         """)
 
         # Load data from CSV into the table
-        df = pd.read_csv("../data/Book1.csv",encoding = 'unicode_escape')
+        df = pd.read_csv("data/Book1.csv",encoding = 'unicode_escape')
         df.to_sql("coordinates", conn, if_exists="replace")
         # Commit changes and close the connection
         conn.commit()

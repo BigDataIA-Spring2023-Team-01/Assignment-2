@@ -31,19 +31,19 @@ with Diagram("Deployment Architecture Diagram", show=False):
             cloudwatch = Cloudwatch("AWS Logs")
             bucket = ElasticBlockStoreEBSSnapshot("AWS s3 bucket")
     
-
+    hostings>> Edge(label="GE reports") >> bucket
     backend << Edge(label="APLI Call", color="black") << userfacing
     backend << Edge(label="Logging Verification") << db
     team = Users("Login User")
     metadata = S3("AWS s3 open source buckets")
 
-    team << Edge("User Interface") << userfacing
-    GE << Edge() << db
+    # team << Edge("User Interface") << userfacing
+    GE >> Edge() >> db
     GE >> Edge(label="static GE html report") >> hostings
     airflow >> Edge(label="GE checkpoints") >> GE
 
     airflow << Edge(label="Data Collection") << metadata
-    airflow >> Edge(label="Updating AWS bucket data periodically") >> db
+    airflow >> Edge(label="Updating AWS bucket data periodically") >> bucket
 
-    cloudwatch >> Edge("Logging actions in AWS cloudwatch") >> airflow
-    hostings>> Edge("GE reports check periodically") >> bucket
+    # cloudwatch >> Edge("Logging actions in AWS cloudwatch") >> airflow
+    # hostings>> Edge("GE reports check periodically") >> bucket

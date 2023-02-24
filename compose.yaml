@@ -1,8 +1,6 @@
 services:
   api:
-    build:
-        context: ./api
-        dockerfile: Dockerfile
+    image: thejasbh/fastapi:e2f5dd0
     container_name: fastapi.latest
     environment:
       PORT: 8080
@@ -12,9 +10,7 @@ services:
     volumes:
       - .:/ass2
   streamlit:
-    build: 
-        context: ./streamlit
-        dockerfile: Dockerfile
+    image: thejasbh/streamlit:e2f5dd0
     container_name: streamlit.latest
     environment:
         PORT: 8501
