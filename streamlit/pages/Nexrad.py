@@ -6,14 +6,23 @@ import os
 import boto3
 import logging
 from dotenv import load_dotenv
+from fastapi import HTTPException
 import io
 import requests
 from bs4 import BeautifulSoup
 import time
-from nexrad_db import retieve_days,retieve_months,retieve_stations
-from url_generator import url_gen_nexrad,file_validator_nexrad
-from goes_db import log_file_download
-from fastapi import HTTPException
+
+#Custom imports
+import nexrad_db,url_generator,goes_db
+
+retieve_days = nexrad_db.retieve_days
+retieve_months = nexrad_db.retieve_months
+retieve_stations = nexrad_db.retieve_stations
+
+url_gen_nexrad = url_generator.url_gen_nexrad
+file_validator_nexrad = url_generator.file_validator_nexrad
+log_file_download = goes_db.log_file_download
+
 # from IPython.core.display import display, HTML
 load_dotenv()
 
@@ -81,15 +90,18 @@ if st.session_state['access_token'] != '':
                 name_of_file = {"filename":selected_file}
                 if(selected_file != 'select'):
                     try:
-                        url = 'http://localhost:8080/transfer_file_nexrad'
+                        url = os.environ.get('URL')
                         headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
                         response = requests.get(url,headers=headers,params=name_of_file)
-                        st.write(response.json)
+                        data = response.json()
+                        st.write("S3 Team Bucket link :",data['S3-Personal'])
+                        st.write("S3 Public GOES link :",data['S3-Public'])
+
+                        timestamp = time.time()
+                        log_file_download(selected_file,timestamp,bucket)
                     except any:
-                        print("Failed")
-                    timestamp = time.time()
-                    log_file_download(selected_file,timestamp,bucket)
-                    st.write(f"The file {name_of_file} does not exist in the {USER_BUCKET_NAME} bucket.")
+                        st.warning('Something went wrong in transferring')
+                    
                 
 
 

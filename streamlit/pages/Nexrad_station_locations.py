@@ -1,14 +1,25 @@
 import streamlit as st
 import pandas as pd
 import requests
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-endpoint_url = "http://10.0.0.17:8000/coordinatesdata"
+url = os.environ.get('URL')
 
-def get_coordinate_data():
-    response = requests.get(endpoint_url)
+if st.session_state['access_token'] != '':
+
+    headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
+    response = requests.get(url,headers=headers)
     data = response.json()
-    return (data)
+    if response.status_code == 200:
+        st.title("Points of all NEXRAD Doppler radars")
+        df = pd.DataFrame(data)
+        st.map(df)
+    else:
+        st.write("Error while loading data for doppler plot")
 
-st.title("Points of all NEXRAD Doppler radars")
-df = pd.DataFrame(get_coordinate_data())
-st.map(df)
+
+else:
+    st.warning("Login First")
+    
