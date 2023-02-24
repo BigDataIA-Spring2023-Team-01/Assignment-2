@@ -87,25 +87,17 @@ if st.session_state['access_token'] != '':
         if st.button('Submit'):
             with st.spinner('Retrieving details for the file you selected, wait for it....!'):
                 time.sleep(5)
-                name_of_file = {"filename":selected_file}
-                if(selected_file != 'select'):
-                    try:
-                        url = os.environ.get('URL')
-                        headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
-                        response = requests.get(url,headers=headers,params=name_of_file)
-                        data = response.json()
-                        st.write("S3 Team Bucket link :",data['S3-Personal'])
-                        st.write("S3 Public GOES link :",data['S3-Public'])
-
-                        timestamp = time.time()
-                        log_file_download(selected_file,timestamp,bucket)
-                    except any:
-                        st.warning('Something went wrong in transferring')
-                    
+                name_of_file = {"filename":str(selected_file)}
                 
+                url = str(os.environ.get('URL')) + 'transfer_file_nexrad'
+                headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
+                response = requests.get(url,headers=headers,params=name_of_file)
+                data = response.json()
+                st.write("S3 Team Bucket link :",data['S3-Personal'])
+                st.write("S3 Public GOES link :",data['S3-Public'])
 
-
-
+                timestamp = time.time()
+                log_file_download(selected_file,timestamp,bucket)
                 
 
 
@@ -116,14 +108,14 @@ if st.session_state['access_token'] != '':
         json_file_name = {"filename":filename}
         if st.button('Get the Link'):
             try:
-                url = 'http://localhost:8080/filename_url_gen_nexrad'
+                url = os.environ.get('URL') + 'filename_url_gen_nexrad'
                 headers = {"Authorization": f"Bearer {st.session_state['access_token']}"}
                 response = requests.get(url,headers=headers,params=json_file_name)
-            except any:
+            except:
                 print("Failed")
-
+            data = response.json()
             if(response.status_code == 200):
-                st.write(response.json()['url'])
+                st.write(data['url'])
             elif(response.status_code == 400):
                 st.warning('Filename does not exist')
             elif(response.status_code == 406):

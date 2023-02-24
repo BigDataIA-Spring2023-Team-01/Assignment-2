@@ -19,6 +19,7 @@ from urllib.parse import quote
 from typing import Dict, Any
 import boto3
 from fastapi import FastAPI
+import jwt
 
 router_file_transfer = APIRouter()
 s3client = boto3.client('s3',region_name='us-east-1',
@@ -39,7 +40,7 @@ def transfer_file_to_S3(selected_file,final_url):
         arr = selected_file.split("_")
         date = arr[3]
         year, day_of_year, hour = date[1:5], date[5:8], date[8:10]
-        final_url = "https://noaa-goes18.s3.amazonaws.com/index.html#ABI-L1b-RadC/{}/{}/{}/{}".format(bucket,year,day_of_year,hour,selected_file)
+        final_url = "https://noaa-goes18.s3.amazonaws.com/index.html#ABI-L1b-RadC/{}/{}/{}/{}".format(year,day_of_year,hour,selected_file)
         print(final_url)
         with open(selected_file, "wb") as data:
                 data.write(requests.get(final_url).content)
@@ -81,7 +82,7 @@ def write_logs(message: str):
 )   
 
 @router_file_transfer.get("/transfer_file")
-def transfer_file(filename: str):
+def transfer_file(filename: str,current_user: jwt.User = jwt.Depends(jwt.get_current_active_user)):
     file_to_transfer = url_gen_goes(filename)
 
     if check_file_exists(filename,USER_BUCKET_NAME):
@@ -93,4 +94,3 @@ def transfer_file(filename: str):
         return {'S3-Personal':'https://{}.s3.amazonaws.com/{}'.format(USER_BUCKET_NAME,filename),
                'S3-Public':file_to_transfer}
     
-

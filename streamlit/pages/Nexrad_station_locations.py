@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-url = os.environ.get('URL')
+url = os.environ.get('URL') + 'coordinatesdata'
 
 if st.session_state['access_token'] != '':
 

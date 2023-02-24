@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 import boto3
 import time
 import pandas as pd
-from jwt import *
+import jwt
 
 #---------------------------------------------------------------------------------------------------------------
 #                            Class Declarations
@@ -50,7 +50,7 @@ cursor = conn.cursor()
 #
 def write_logs(message: str):
         clientlogs.put_log_events(
-        logGroupName =  "Assignment_2",
+        logGroupName =  "Assignment_1",
         logStreamName = "GOES18",
         logEvents= [
             {

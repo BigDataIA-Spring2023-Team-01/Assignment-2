@@ -3,7 +3,7 @@ from fastapi import FastAPI,APIRouter
 import uvicorn
 import pandas as pd
 import numpy as np
-
+import jwt
 
 
 router_nexrad_coords = APIRouter()
@@ -31,7 +31,7 @@ def convert_coordinates(coordinates):
         return [latarray, longarray]
 
 @router_nexrad_coords.get("/coordinatesdata")
-async def get_data_of_coordinates():
+async def get_data_of_coordinates(current_user: jwt.User = jwt.Depends(jwt.get_current_active_user)):
     conn = sqlite3.connect("../data/ddl.dbo")
     cursor = conn.cursor()
     

@@ -19,7 +19,7 @@ from urllib.parse import quote
 from typing import Dict, Any
 import boto3
 from fastapi import FastAPI
-
+import jwt
 router_file_transfer_nexrad = APIRouter()
 s3client = boto3.client('s3',region_name='us-east-1',
                         aws_access_key_id = os.environ.get('AWS_ACCESS_KEY'),
@@ -42,7 +42,6 @@ def transfer_file_to_S3_nexrad(filename,final_url):
         day_of_year = parts[0][8:10] 
         hour = parts[0][10:]
         final_url = "https://noaa-nexrad-level2.s3.amazonaws.com/index.html#{}/{}/{}/{}/".format(year,day_of_year,hour,station_code)        
-        print(final_url)
         with open(filename, "wb") as data:
                 data.write(requests.get(final_url).content)
                 s3client.upload_file(filename, USER_BUCKET_NAME,filename )
@@ -77,7 +76,7 @@ def write_logs(message: str):
 )   
 
 @router_file_transfer_nexrad.get("/transfer_file_nexrad")
-def transfer_file_nexrad(filename: str):
+def transfer_file_nexrad(filename: str,current_user: jwt.User = jwt.Depends(jwt.get_current_active_user)):
     file_to_transfer = url_gen_nexrad(filename)
 
     if check_file_exists(filename,USER_BUCKET_NAME):

@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 import boto3
 import time
 import pandas as pd
-from jwt import *
+import jwt
 
 #---------------------------------------------------------------------------------------------------------------
 #                            Class Declarations
