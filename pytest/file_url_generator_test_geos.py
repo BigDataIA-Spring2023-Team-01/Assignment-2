@@ -15,7 +15,7 @@ router_file_url_generator = file_url_generator.router_file_url_generator
 
 client = TestClient(router_file_url_generator)
 #URL = str(os.environ.get('URL')) + 'filename_url_gen_geos'
-URL ='http://localhost:8080/filename_url_gen_geos'
+URL ='http://localhost:8080/url_generator_geos'
 
 #def url_gen_goes(input):
 #    arr = input.split("_")

@@ -42,13 +42,24 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
-        name: Build and push
+        name: Build and push Fastapi
         uses: docker/build-push-action@v4
         with:
-          context: ./fastapi    # path to dockerfile
+          context: ./api    # path to dockerfile
           # file: Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/labs_fastpi:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/labs_fastpi:${{ steps.commit.outputs.short }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/fastapi:gitaction
+            ${{ secrets.DOCKERHUB_USERNAME }}/fastapi:${{ steps.commit.outputs.short }}
+          # Change the container image "demo_fastapi_private"
+      -
+      name: Build and push Streamlit
+        uses: docker/build-push-action@v4
+        with:
+          context: ./streamlit    # path to dockerfile
+          # file: Dockerfile
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/streamlit:gitaction
+            ${{ secrets.DOCKERHUB_USERNAME }}/streamlit:${{ steps.commit.outputs.short }}
           # Change the container image "demo_fastapi_private"
