@@ -2,6 +2,10 @@
 
 [![fastapi-ci](https://github.com/BigDataIA-Spring2023-Team-01/Assignment-2/actions/workflows/fastapi.yml/badge.svg)](https://github.com/BigDataIA-Spring2023-Team-01/Assignment-2/actions/workflows/fastapi.yml)
 
+#Hosted on AWS EC2
+
+Streamlit - http://ec2-52-45-166-0.compute-1.amazonaws.com:8501/
+FastAPI Docs - http://ec2-52-45-166-0.compute-1.amazonaws.com:8080/docs#/
 
 Reference:
 
