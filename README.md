@@ -40,7 +40,7 @@ This contains all the streamlit pages and use the api calls from /api folder to 
  ````
   docker compose up -d --build
  ````
- 
+ link to documentation: https://codelabs-preview.appspot.com/?file_id=1byqVFAzj4xZLyOtLGMt0_uuTBnVcbpq4XGSq8Yxn6pQ#0
  ## Declaration 
  Contribution 
  
